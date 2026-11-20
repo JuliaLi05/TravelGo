@@ -19,4 +19,4 @@ Witryna składa się ze strony głównej oraz trzech podstron:
 - **CSS3** – wygląd, układ oraz efekty wizualne.
 - **Bootstrap** – gotowe komponenty i wsparcie responsywności.
 
-**Na początek zamieściłam mockup strony w HTML5.**
+**Na początek zamieściłam mockup strony w HTML5 przedstawiający planowany wygląd i rozmieszczenie najważniejszych elementów witryny. W kolejnych etapach planowane jest przygotowanie pozostałych podstron oraz wdrożenie stylów CSS, responsywności i komponentów Bootstrap.**
