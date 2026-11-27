@@ -37,4 +37,17 @@ Sekcja została wykonana z wykorzystaniem elementów HTML5:
 - `<summary>` – wyświetla treść pytania, którego kliknięcie powoduje rozwinięcie odpowiedzi.
 Wygląd sekcji został dostosowany za pomocą CSS. Zastosowano m.in. selektor `.faq[open]`, który zmienia wygląd rozwiniętego elementu.
 ### Formularz kontaktowy 
-Na podstronie Kontakt znajduje się formularz kontaktowy zawierający pola takie jak: imię i nazwisko, adres e-mail, temat wiadomości, treść wiadomości. Do stylizacji wykorzystano klasy Bootstrapa, takie jak form-control i form-label, które zapewniają spójny wygląd pól formularza. Formularz wykorzystuje mechanizm mailto:, który umożliwia otwarcie domyślnego programu pocztowego użytkownika w celu przygotowania wiadomości e-mail. Wiadomość nie jest wysyłana automatycznie – użytkownik musi samodzielnie zatwierdzić jej wysłanie w programie pocztowym. Działanie formularza zależy od konfiguracji poczty na urządzeniu.
+FNa podstronie Kontakt znajduje się formularz kontaktowy zawierający cztery pola:
+- **Imię i nazwisko** – pole tekstowe (input type="text").
+- **Adres e-mail** – pole z podstawową walidacją poprawności adresu (input type="email").
+- **Temat wiadomości** – pole tekstowe (input type="text").
+- **Wiadomość** – wielowierszowe pole tekstowe (textarea).
+Do stylizacji formularza wykorzystano klasy Bootstrapa form-control i form-label. Pola formularza zostały rozmieszczone w responsywnym układzie – na większych ekranach imię i nazwisko oraz adres e-mail znajdują się obok siebie, natomiast na urządzeniach mobilnych są wyświetlane jedno pod drugim.
+#### Rozszerzane pole wiadomości
+Pole Wiadomość zostało utworzone za pomocą elementu HTML <textarea>, który umożliwia wpisywanie dłuższego tekstu w wielu wierszach.
+W przeciwieństwie do standardowego pola <input>, element <textarea> może być ręcznie rozszerzany przez użytkownika, jeśli pozwalają na to ustawienia przeglądarki i CSS. Dzięki temu można dostosować jego wysokość do długości wpisywanej wiadomości.
+Zastosowanie tego elementu poprawia wygodę korzystania z formularza i pozwala na czytelne wprowadzanie dłuższych zapytań dotyczących wycieczek.
+#### Działanie formularza
+Formularz wykorzystuje mechanizm mailto:, który umożliwia otwarcie domyślnej aplikacji pocztowej użytkownika z przygotowaną wiadomością.
+Wiadomość nie jest wysyłana automatycznie – użytkownik musi samodzielnie zatwierdzić jej wysłanie w programie pocztowym. Działanie formularza zależy od konfiguracji poczty na urządzeniu.
+W formularzu zastosowano również atrybut required, który wymaga uzupełnienia wskazanych pól przed próbą wysłania formularza.
