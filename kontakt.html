@@ -19,6 +19,18 @@
     .hero { padding: 7rem 1.25rem; color: white; background: linear-gradient(90deg, rgba(13,49,73,.82), rgba(13,49,73,.2)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85') center/cover; }
     .hero h1 { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; }
     .hero p { max-width: 31rem; font-size: 1.15rem; }
+    .dane-kontaktowe {padding: 3rem 1rem;background: white;}
+    .kontakt-karty {display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto;}
+    .kontakt-karta {background: var(--jasny); border: 1px solid #d9e9ed; border-radius: .85rem; padding: 2rem; text-align: center; transition: transform 200ms ease, box-shadow 200ms ease; }
+    .kontakt-karta:hover {transform: translateY(-4px);box-shadow: 0 8px 25px #183a4b18;}
+    .kontakt-karta h3 {color: var(--granat); font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem;}
+    .kontakt-karta p, .kontakt-karta address {margin-bottom: 0;line-height: 1.8;font-style: normal;}
+    .kontakt-karta a {color: var(--turkus);font-weight: 700;}
+    .kontakt-karta a:hover {color: #006b7c; text-decoration: underline;}
+    @media (min-width: 40rem) {.kontakt-karty {grid-template-columns: repeat(2, minmax(0, 1fr));}}
+    @media (min-width: 64rem) {.kontakt-karty {grid-template-columns: repeat(3, minmax(0, 1fr));}}
+    @media (prefers-reduced-motion: reduce) {.kontakt-karta {transition: none;}
+    .kontakt-karta:hover {transform: none;}}
     .przyciski-hero { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
     .przycisk { display: inline-block; padding: .8rem 1.4rem; border: 2px solid var(--turkus); border-radius: .75rem; background: var(--turkus); color: white; font-weight: 700; transition: background-color 200ms ease, transform 200ms ease; }
     .przycisk:hover { background: #006b7c; transform: translateY(-3px); color: white; }
@@ -76,6 +88,31 @@
     .faq p { margin: 1rem 0 0; }
     @media (min-width: 64rem) { .oferty { grid-template-columns: repeat(3, minmax(0,1fr)); } .wartosci { grid-template-columns: repeat(3,minmax(0,1fr)); } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* Układ kontaktu: trzy karty, a pod nimi szeroki formularz */
+    .dane-kontaktowe { padding: 0; }
+    .kontakt-grid { max-width: 1140px; margin-inline: auto; gap: 3.5rem; }
+    .kontakt-karty { max-width: none; }
+    .formularz-sekcja { width: 100%; }
+    .formularz-sekcja > .tytul { margin-bottom: 1.5rem; }
+    .formularz-panel {
+      background: var(--jasny);
+      border: 1px solid #d9e9ed;
+      border-radius: 1rem;
+      padding: clamp(1.25rem, 3.5vw, 3rem);
+    }
+    .formularz-opis { max-width: 44rem; margin: 0 auto 2rem; text-align: center; line-height: 1.7; }
+    .formularz-pola { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+    .formularz-pola .pole { min-width: 0; }
+    .formularz-pola .form-control { min-height: 3rem; background: #fff; }
+    .formularz-pola textarea.form-control { min-height: 11rem; }
+    .formularz-akcje { margin-top: 1.75rem; display: flex; justify-content: center; }
+    .formularz-akcje .przycisk { min-width: 15rem; }
+    .kontakt-karta a:focus-visible { outline: 3px solid #ffcb5c; outline-offset: 3px; }
+    @media (min-width: 40rem) {
+      .formularz-pola { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .formularz-pola .pole-pelna { grid-column: 1 / -1; }
+    }
 </style>
 </head>
 <body>
@@ -94,28 +131,68 @@
   <main id="tresc">
     <section class="podstrona-hero"><div class="container"><h1>Kontakt</h1><p>Masz pytanie dotyczące wyjazdu? Przygotuj wiadomość do TravelGo.</p></div></section>
     <section class="podstrona-main"><div class="container kontakt-grid">
-       <section aria-labelledby="formularz-naglowek">
-        <h2 id="formularz-naglowek" class="mb-3">Formularz kontaktowy</h2>
-        <p class="mb-4">Po kliknięciu przycisku „Otwórz wiadomość e-mail” przeglądarka spróbuje uruchomić Twój program pocztowy. Wiadomość nie zostanie wysłana automatycznie.</p>
-        <form action="mailto:kontakt@travelgo.pl" method="post" enctype="text/plain">
-          <div class="mb-3">
-            <label for="imie" class="form-label">Imię i nazwisko</label>
-            <input id="imie" name="Imie i nazwisko" class="form-control" type="text" autocomplete="name" required maxlength="100">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Adres e-mail</label>
-            <input id="email" name="Email nadawcy" class="form-control" type="email" autocomplete="email" required maxlength="150">
-          </div>
-          <div class="mb-3">
-            <label for="temat" class="form-label">Temat wiadomości</label>
-            <input id="temat" name="Temat" class="form-control" type="text" required maxlength="120">
-          </div>
-          <div class="mb-3">
-            <label for="wiadomosc" class="form-label">Wiadomość</label>
-            <textarea id="wiadomosc" name="Wiadomosc" class="form-control" rows="6" required maxlength="4000"></textarea>
-          </div>
-          <button type="submit" class="przycisk">Otwórz wiadomość e-mail →</button>
-        </form>
+    <section class="dane-kontaktowe">
+    <h2 class="tytul">Dane kontaktowe</h2>
+
+    <div class="kontakt-karty">
+
+        <article class="kontakt-karta">
+            <h3>Adres</h3>
+            <address>
+                TravelGo<br>
+                ul. Wakacyjna 12<br>
+                30-024 Kraków
+            </address>
+        </article>
+
+        <article class="kontakt-karta">
+            <h3>Telefon</h3>
+            <p>
+                <a href="tel:+48123456789">
+                    +48 123 456 789
+                </a>
+            </p>
+        </article>
+
+        <article class="kontakt-karta">
+            <h3>E-mail</h3>
+            <p>
+                <a href="mailto:kontakt@travelgo.pl">
+                    kontakt@travelgo.pl
+                </a>
+            </p>
+        </article>
+
+    </div>
+  </section>
+      <section class="formularz-sekcja" aria-labelledby="formularz-naglowek">
+        <h2 id="formularz-naglowek" class="tytul">Formularz kontaktowy</h2>
+        <div class="formularz-panel">
+          <p class="formularz-opis">Masz pytania dotyczące podróży? Wypełnij pola poniżej. Przycisk otworzy Twój program pocztowy — wiadomość nie zostanie wysłana automatycznie.</p>
+          <form action="mailto:kontakt@travelgo.pl" method="post" enctype="text/plain">
+            <div class="formularz-pola">
+              <div class="pole">
+                <label for="imie" class="form-label">Imię i nazwisko</label>
+                <input id="imie" name="Imie i nazwisko" class="form-control" type="text" autocomplete="name" required maxlength="100">
+              </div>
+              <div class="pole">
+                <label for="email" class="form-label">Adres e-mail</label>
+                <input id="email" name="Email nadawcy" class="form-control" type="email" autocomplete="email" required maxlength="150">
+              </div>
+              <div class="pole pole-pelna">
+                <label for="temat" class="form-label">Temat wiadomości</label>
+                <input id="temat" name="Temat" class="form-control" type="text" required maxlength="120">
+              </div>
+              <div class="pole pole-pelna">
+                <label for="wiadomosc" class="form-label">Wiadomość</label>
+                <textarea id="wiadomosc" name="Wiadomosc" class="form-control" rows="6" required maxlength="4000"></textarea>
+              </div>
+            </div>
+            <div class="formularz-akcje">
+              <button type="submit" class="przycisk">Otwórz wiadomość e-mail →</button>
+            </div>
+          </form>
+        </div>
       </section>
     </div></section>
   </main>
