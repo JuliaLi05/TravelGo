@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TravelGo — biuro podróży. Poznaj kierunki, informacje o firmie i skontaktuj się z nami.">
+  <title>Wycieczki – TravelGo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root { --turkus: #008da5; --turkus-jasny: #4f91a9; --granat: #19334c; --jasny: #f2f9fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--granat); font-family: Arial, sans-serif; }
+    a { text-decoration: none; }
+    img { max-width: 100%; height: auto; }
+    .logo { color: var(--turkus); font-size: 1.6rem; font-weight: 800; }
+    .menu { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .menu a { color: var(--granat); font-weight: 600; transition: color 200ms ease; }
+    .menu a:hover, .menu a:focus-visible { color: var(--turkus); }
+    .hero { padding: 7rem 1.25rem; color: white; background: linear-gradient(90deg, rgba(13,49,73,.82), rgba(13,49,73,.2)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85') center/cover; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; }
+    .hero p { max-width: 31rem; font-size: 1.15rem; }
+    .przyciski-hero { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .przycisk { display: inline-block; padding: .8rem 1.4rem; border: 2px solid var(--turkus); border-radius: .75rem; background: var(--turkus); color: white; font-weight: 700; transition: background-color 200ms ease, transform 200ms ease; }
+    .przycisk:hover { background: #006b7c; transform: translateY(-3px); color: white; }
+    .przycisk-obrys { display: inline-block; padding: .8rem 1.4rem; border: 3px solid var(--turkus-jasny); border-radius: 1.25rem; background: rgba(255,255,255,.94); color: #24566a; font-weight: 800; text-align: center; transition: background-color 200ms ease, color 200ms ease, transform 200ms ease; }
+    .przycisk-obrys:hover { background: var(--turkus-jasny); color: white; transform: translateY(-3px); }
+    .przycisk:focus-visible, .przycisk-obrys:focus-visible { outline: 3px solid #ffcb5c; outline-offset: 3px; }
+    .tytul { text-align: center; font-weight: 800; margin-bottom: 2rem; }
+    .tytul::after { content: ''; display: block; width: 3.5rem; height: .22rem; background: var(--turkus); margin: .8rem auto 0; border-radius: 2rem; }
+    .kierunki { background: var(--jasny); padding: 4rem 1rem; }
+    .lista-kart { display: grid; grid-template-columns: minmax(0,1fr); gap: 1.25rem; max-width: 1100px; margin: 0 auto; }
+    .karta { padding: 1.8rem; background: white; border: 1px solid #d9e9ed; border-radius: .75rem; transition: transform 200ms ease, box-shadow 200ms ease; }
+    .karta:hover { transform: translateY(-4px); box-shadow: 0 8px 25px #183a4b18; }
+    .karta .symbol { font-size: 2.4rem; }
+    .karta h3 { margin-top: .75rem; font-size: 1.3rem; font-weight: 700; }
+    .karta a { color: var(--turkus); font-weight: 700; }
+    .o-nas { padding: 4rem 1rem; text-align: center; }
+    .o-nas p { max-width: 650px; margin: auto; line-height: 1.7; }
+    footer { background: var(--granat); color: white; padding: 1.4rem 1rem; text-align: center; }
+    @media (min-width: 40rem) { .lista-kart { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 64rem) { .lista-kart { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 39.99rem) { header .container { flex-direction: column; align-items: flex-start !important; gap: 1rem; } .menu { gap: .8rem 1.1rem; } .hero { padding: 5rem 1.25rem; } }
+    @media (prefers-reduced-motion: reduce) { .przycisk, .przycisk-obrys, .karta, .menu a { transition: none; } .przycisk:hover, .przycisk-obrys:hover, .karta:hover { transform: none; } }
+    .podstrona-hero { padding: 4.5rem 1rem 3.75rem; background: var(--jasny); text-align: center; }
+    .podstrona-hero h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); font-weight: 800; }
+    .podstrona-hero p { max-width: 45rem; margin: 1rem auto 0; line-height: 1.7; }
+    .podstrona-main { padding: 3.5rem 1rem 5rem; }
+    .oferty { display: grid; grid-template-columns: minmax(0,1fr); gap: 1.5rem; }
+    .oferta { overflow: hidden; border: 1px solid #d9e9ed; border-radius: .85rem; background: white; display: flex; flex-direction: column; }
+    .oferta img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+    .oferta-tresc { padding: 1.4rem; display: flex; flex-direction: column; flex: 1; }
+    .oferta h2 { font-size: 1.5rem; font-weight: 800; }
+    .oferta p { line-height: 1.6; }
+    .oferta .przycisk { align-self: flex-start; margin-top: auto; }
+    .oznaczenie { color: #276779; font-weight: 700; font-size: .9rem; letter-spacing: .03em; }
+    .tresc-szeroka { max-width: 850px; margin: 0 auto; }
+    .tresc-szeroka p { line-height: 1.8; }
+    .wartosci { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin: 2rem 0; }
+    .wartosc { background: var(--jasny); border: 1px solid #d9e9ed; border-radius: .75rem; padding: 1.5rem; }
+    .wartosc h2 { font-size: 1.25rem; font-weight: 800; }
+    .kontakt-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 2rem; }
+    .kontakt-panel { background: var(--jasny); border: 1px solid #d9e9ed; border-radius: .85rem; padding: 1.75rem; }
+    .kontakt-panel h2 { font-size: 1.4rem; font-weight: 800; }
+    .kontakt-panel p { line-height: 1.7; }
+    .kontakt-panel a, .footer-link { color: #006f84; text-decoration: underline; text-underline-offset: .15rem; }
+    .form-label { font-weight: 700; }
+    .form-control:focus { border-color: var(--turkus); box-shadow: 0 0 0 .2rem rgba(0,141,165,.18); }
+    .przycisk { cursor: pointer; }
+    .menu a[aria-current="page"] { color: var(--turkus); text-decoration: underline; text-underline-offset: .35rem; }
+    .menu a:focus-visible, .oferta a:focus-visible, footer a:focus-visible { outline: 3px solid #ffcb5c; outline-offset: 3px; }
+    .faq { border: 1px solid #d9e9ed; border-radius: .75rem; padding: 1rem 1.2rem; margin: .8rem 0; }
+    .faq > summary { cursor: pointer; font-weight: 700; }
+    .faq[open] { background: var(--jasny); }
+    .faq p { margin: 1rem 0 0; }
+    @media (min-width: 40rem) { .oferty, .wartosci { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 64rem) { .oferty { grid-template-columns: repeat(3, minmax(0,1fr)); } .kontakt-grid { grid-template-columns: 1fr 1.35fr; } .wartosci { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 bg-white p-2" href="#tresc">Przejdź do treści</a>
+  <header class="py-3 bg-white">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="logo" href="glowna.html">✈ TravelGo</a>
+      <nav class="menu" aria-label="Menu główne">
+        <a href="glowna.html">Strona główna</a>
+        <a href="wycieczki.html" aria-current="page">Wycieczki</a>
+        <a href="o-nas.html">O nas</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+  <main id="tresc">
+    <section class="podstrona-hero" aria-labelledby="naglowek">
+      <div class="container"><h1 id="naglowek">Nasze wycieczki</h1><p>Wybierz kierunek, który najbardziej Cię inspiruje. Poniższe propozycje są przykładowe — szczegóły ustalamy indywidualnie.</p></div>
+    </section>
+    <section class="podstrona-main" aria-label="Proponowane kierunki">
+      <div class="container"><div class="oferty">      <article class="oferta" id="grecja">
+        <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?auto=format&fit=crop&w=960&q=80" alt="Białe zabudowania na wyspie Santorini nad morzem" loading="lazy" width="960" height="600">
+        <div class="oferta-tresc">
+          <span class="oznaczenie">Grecja</span>
+          <h2>Santorini i greckie wyspy</h2>
+          <p>Białe domki, błękitne morze i słoneczne plaże. Odkrywaj urokliwe uliczki, odpoczywaj nad wodą i poznawaj lokalną kulturę.</p>
+          <a class="przycisk" href="kontakt.html">Zapytaj o wycieczkę →</a>
+        </div>
+      </article>
+      <article class="oferta" id="wlochy">
+        <img src="https://images.unsplash.com/photo-1616234643798-12dc87da67b4?auto=format&fit=crop&w=960&q=80" alt="Kolorowe domy w Manaroli na skalistym wybrzeżu Włoch" loading="lazy" width="960" height="600">
+        <div class="oferta-tresc">
+          <span class="oznaczenie">Włochy</span>
+          <h2>Włoskie wybrzeże</h2>
+          <p>Kolorowe miasteczka, wyjątkowa kuchnia i malownicze widoki. Propozycja dla osób lubiących zwiedzanie i odpoczynek.</p>
+          <a class="przycisk" href="kontakt.html">Zapytaj o wycieczkę →</a>
+        </div>
+      </article>
+      <article class="oferta" id="egzotyka">
+        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=960&q=80" alt="Tropikalna plaża z palmami i turkusową wodą" loading="lazy" width="960" height="600">
+        <div class="oferta-tresc">
+          <span class="oznaczenie">Egzotyczne wakacje</span>
+          <h2>Tropikalny wypoczynek</h2>
+          <p>Palmy, jasny piasek i turkusowa woda. Wybierz spokojny wypoczynek w egzotycznym otoczeniu.</p>
+          <a class="przycisk" href="kontakt.html">Zapytaj o wycieczkę →</a>
+        </div>
+      </article>
+      </div></div>
+    </section>
+  </main>
+  <footer>TravelGo · Kontakt: <a class="footer-link" href="mailto:kontakt@travelgo.pl">kontakt@travelgo.pl</a> <span aria-hidden="true">·</span> © 2026</footer>
+</body>
+</html>
